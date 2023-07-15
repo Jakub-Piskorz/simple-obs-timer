@@ -1,6 +1,8 @@
 # Simple timer for OBS.
 
-## Just add Browser source and configure timer using URL params.
+Just add Browser source and configure timer using URL params.
+
+[Just paste it into your browser source ](https://simple-obs-timer.netlify.app/0:01:00?color=black;fontSize=60;fontWeight=600;)
 
 ### Examples
 
