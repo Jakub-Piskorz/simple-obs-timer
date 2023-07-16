@@ -4,6 +4,10 @@ Just add Browser source and configure timer using URL params.
 
 [Just paste it into your browser source ](https://simple-obs-timer.netlify.app/0:01:00?color=black;fontSize=60;fontWeight=600;)
 
+![image](https://github.com/Jakub-Piskorz/simple-obs-timer/assets/54907055/2fb4c036-d9b1-4d0a-b613-9715b3f4d937)
+
+
+
 ### Examples
 
 - `url/0:20:00` sets the timer for 20 minutes.
