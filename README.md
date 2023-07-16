@@ -1,7 +1,7 @@
 # Simple timer for OBS.
 Very simple timer for your OBS without any plugins, logins or extra installation.
 
-Just put [one link](https://simple-obs-timer.netlify.app/0:01:00?color=purple;fontSize=60;fontWeight=600;) into the Browser source and it work.
+Just put [one link](https://simple-obs-timer.netlify.app/0:01:00?color=purple;fontSize=60;fontWeight=600;) into the Browser source and it works.
 
 ## Getting started
 - Open your OBS, and add new source named **Browser**.
