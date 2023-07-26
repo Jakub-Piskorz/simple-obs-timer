@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import useCssParser from './utils/use-css-parser';
 import DameDaNe from './assets/dame.mp3';
@@ -21,24 +21,29 @@ const App = () => {
   const sound = useMemo(() => {
     const _sound = new Audio(DameDaNe);
     _sound.setAttribute('loop', 'true');
-    console.log(_sound);
     return _sound;
   }, []);
+  const [paused, setPaused] = useState(false);
 
   // Launches timer.
   useEffect(() => {
-    const clock = setInterval(() => {
+    const clock = setTimeout(() => {
       setSecondsLeft((secondsLeft) => {
-        if (!secondsLeft) {
-          clearInterval(clock);
-          sound.play();
+        if (!paused && secondsLeft && secondsLeft > 0) {
+          return secondsLeft - 1;
+        } else {
           return secondsLeft;
         }
-        return secondsLeft - 1;
       });
+      clearTimeout(clock);
     }, 1000);
-    return () => clearInterval(clock);
-  }, []);
+
+    if (!secondsLeft) {
+      sound.play();
+    }
+
+    return () => clearTimeout(clock);
+  }, [secondsLeft, paused]);
 
   // Turns 9 into '09'. Used to render hours, minutes, seconds.
   const padUnit = useCallback(
@@ -60,6 +65,9 @@ const App = () => {
       <div className="timer-container" style={cssFromUrl}>
         {renderedTimer}
       </div>
+      <button onClick={() => setPaused(!paused)}>
+        {paused ? 'Pause' : 'Run'}
+      </button>
     </>
   );
 };
