@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css';
 import useCssParser from './utils/use-css-parser';
 import DameDaNe from './assets/dame.mp3';
