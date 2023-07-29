@@ -1,12 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import useCssParser from './utils/use-css-parser';
-import DameDaNe from './assets/dame.mp3';
+import Alert from './assets/alert.wav';
 
 const App = () => {
   const cssFromUrl = useCssParser();
-
+  const withPause = useRef<boolean>(
+    window.location.pathname.split('/').some((prop) => prop.match(/^pause$/))
+  );
   // Initially, total amount of seconds from time in URL params.
+
   const [secondsLeft, setSecondsLeft] = useState<number | null>(() => {
     // Should be "const [hours, minutes, seconds] = ...", but TS cries for some reason
     const units = window.location.pathname
@@ -19,8 +22,9 @@ const App = () => {
     return units[0] * 60 * 60 + units[1] * 60 + units[2];
   });
   const sound = useMemo(() => {
-    const _sound = new Audio(DameDaNe);
-    _sound.setAttribute('loop', 'true');
+    const _sound = new Audio(Alert);
+    // _sound.setAttribute('loop', 'true');
+    _sound.volume = 0.4;
     return _sound;
   }, []);
   const [paused, setPaused] = useState(false);
@@ -65,9 +69,11 @@ const App = () => {
       <div className="timer-container" style={cssFromUrl}>
         {renderedTimer}
       </div>
-      <button onClick={() => setPaused(!paused)}>
-        {paused ? 'Pause' : 'Run'}
-      </button>
+      {withPause.current && (
+        <button onClick={() => setPaused(!paused)}>
+          {paused ? 'Pause' : 'Run'}
+        </button>
+      )}
     </>
   );
 };
